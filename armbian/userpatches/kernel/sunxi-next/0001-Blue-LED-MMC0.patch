@@ -1,0 +1,32 @@
+From 5475bdea8b730776c6f21afa2fd3aa337763d647 Mon Sep 17 00:00:00 2001
+From: "y.salnikov" <y.salnikov65535@gmail.com>
+Date: Sat, 16 Apr 2016 17:16:01 +0400
+Subject: [PATCH] Blue LED MMC0
+
+---
+ arch/arm/boot/dts/sun7i-a20-cubieboard2.dts | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts b/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts
+index 71b0e30..83c1b2c 100755
+--- a/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts
++++ b/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts
+@@ -68,12 +68,13 @@
+ 		pinctrl-0 = <&led_pins_cubieboard2>;
+ 
+ 		blue {
+-			label = "cubieboard2:blue:usr";
++			label = "cubieboard2:blue:mmc0";
+ 			gpios = <&pio 7 21 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger="mmc0";
+ 		};
+ 
+ 		green {
+-			label = "cubieboard2:green:usr";
++			label = "cubieboard2:green:user";
+ 			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>;
+ 		};
+ 	};
+-- 
+1.9.1
+
