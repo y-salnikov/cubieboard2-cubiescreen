@@ -1,0 +1,23 @@
+touchscreen :                           dec                     hex
+
+touch_point_num				109			0x6D
+
+X2_H					70[0..3]		0x46
+X2_L					66			0x42
+Y2_H					71 [0..3]           	0x47
+Y2_L					67			0x43
+touch2_id				?
+DX2					80			0x50					
+DY2					82			0x52
+
+X1_H					68[0..3]		0x44
+X1_L					64			0x40
+Y1_H					69[0..3]		0x45
+Y1_L					65			0x41
+touch1_id				?
+DX1					79			0x4f
+DY1					81			0x51
+
+
+координаты X1,X2 и Y1,Y2  могут менятся местами. Т.о. всегда X1 < X2 и Y1 < Y2
+  
