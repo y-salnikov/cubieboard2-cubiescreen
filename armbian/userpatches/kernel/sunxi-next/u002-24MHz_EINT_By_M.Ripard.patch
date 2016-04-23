@@ -1,0 +1,51 @@
+From ba4b038309217366376282b8427ffcc709202434 Mon Sep 17 00:00:00 2001
+From: "y.salnikov" <y.salnikov65535@gmail.com>
+Date: Sat, 23 Apr 2016 14:15:42 +0400
+Subject: [PATCH] 24MHz_EINT_By_M.Ripard
+
+---
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c | 3 +++
+ drivers/pinctrl/sunxi/pinctrl-sunxi.h | 6 ++++++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+index 884c2b3..eef992a 100644
+--- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
++++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+@@ -1029,6 +1029,9 @@ int sunxi_pinctrl_init(struct platform_device *pdev,
+ 		writel(0xffffffff,
+ 		       pctl->membase + sunxi_irq_status_reg_from_bank(i,
+ 						pctl->desc->irq_bank_base));
++	/* Set Interrupt clock to 24MHz */
++                  writel(1, pctl->membase + sunxi_irq_debounce_reg_from_bank(i));
++
+ 
+ 		irq_set_chained_handler_and_data(pctl->irq[i],
+ 						 sunxi_pinctrl_irq_handler,
+diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.h b/drivers/pinctrl/sunxi/pinctrl-sunxi.h
+index 0afce1a..ddeb3dc 100644
+--- a/drivers/pinctrl/sunxi/pinctrl-sunxi.h
++++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.h
+@@ -68,6 +68,7 @@
+ #define IRQ_STATUS_IRQ_PER_REG		32
+ #define IRQ_STATUS_IRQ_BITS		1
+ #define IRQ_STATUS_IRQ_MASK		((1 << IRQ_STATUS_IRQ_BITS) - 1)
++#define IRQ_DEBOUNCE_REG	0x218
+ 
+ #define IRQ_MEM_SIZE		0x20
+ 
+@@ -284,6 +285,11 @@ static inline u32 sunxi_irq_status_offset(u16 irq)
+ 	return irq_num * IRQ_STATUS_IRQ_BITS;
+ }
+ 
++static inline u32 sunxi_irq_debounce_reg_from_bank(u8 bank)
++{
++	return IRQ_DEBOUNCE_REG + bank * IRQ_MEM_SIZE;
++}
++
+ int sunxi_pinctrl_init(struct platform_device *pdev,
+ 		       const struct sunxi_pinctrl_desc *desc);
+ 
+-- 
+1.9.1
+
