@@ -1,7 +1,7 @@
-From 9a8d80772c9983b2c1ccb6c3b3f730961381119f Mon Sep 17 00:00:00 2001
+From d32ec105f49cc5d322afbf931d8267976a3c530a Mon Sep 17 00:00:00 2001
 From: "y.salnikov" <y.salnikov65535@gmail.com>
-Date: Sat, 16 Apr 2016 16:57:08 +0400
-Subject: [PATCH] Cubiescreen
+Date: Mon, 25 Jul 2016 17:55:48 +0400
+Subject: [PATCH] CB2_Cubiescreen
 
 ---
  arch/arm/dts/sun7i-a20-cubieboard2.dts |   2 +-
@@ -11,7 +11,7 @@ Subject: [PATCH] Cubiescreen
  4 files changed, 167 insertions(+), 3 deletions(-)
 
 diff --git a/arch/arm/dts/sun7i-a20-cubieboard2.dts b/arch/arm/dts/sun7i-a20-cubieboard2.dts
-index 39a51d5..e8e34b3 100644
+index 1fa832d..0478ed5 100644
 --- a/arch/arm/dts/sun7i-a20-cubieboard2.dts
 +++ b/arch/arm/dts/sun7i-a20-cubieboard2.dts
 @@ -68,7 +68,7 @@
@@ -24,24 +24,24 @@ index 39a51d5..e8e34b3 100644
  		};
  
 diff --git a/arch/arm/dts/sun7i-a20.dtsi b/arch/arm/dts/sun7i-a20.dtsi
-index 71ab6b8..ea84f05 100644
+index 0940a78..0a0acb6 100644
 --- a/arch/arm/dts/sun7i-a20.dtsi
 +++ b/arch/arm/dts/sun7i-a20.dtsi
-@@ -76,7 +76,7 @@
- 				     "simple-framebuffer";
+@@ -78,7 +78,7 @@
  			allwinner,pipeline = "de_be0-lcd0";
- 			clocks = <&pll5 1>, <&ahb_gates 36>, <&ahb_gates 44>;
+ 			clocks = <&pll5 1>, <&ahb_gates 36>, <&ahb_gates 44>,
+ 				 <&dram_gates 26>;
 -			status = "disabled";
 +			status = "okay";
  		};
  
  		framebuffer@2 {
 diff --git a/configs/Cubieboard2_defconfig b/configs/Cubieboard2_defconfig
-index 2f5e75d..8721d1b 100644
+index 4b9d722..0fcacce 100644
 --- a/configs/Cubieboard2_defconfig
 +++ b/configs/Cubieboard2_defconfig
-@@ -13,3 +13,20 @@ CONFIG_SYS_EXTRA_OPTIONS="SUNXI_GMAC,AHCI,SATAPWR=SUNXI_GPB(8)"
- CONFIG_CMD_GPIO=y
+@@ -12,3 +12,20 @@ CONFIG_SYS_EXTRA_OPTIONS="SUNXI_GMAC,AHCI,SATAPWR=SUNXI_GPB(8)"
+ # CONFIG_CMD_FPGA is not set
  CONFIG_ETH_DESIGNWARE=y
  CONFIG_USB_EHCI_HCD=y
 +
@@ -62,7 +62,7 @@ index 2f5e75d..8721d1b 100644
 +#CONFIG_VIDEO_LCD_CUBIESCREEN_SDI="PI12"
 +
 diff --git a/drivers/video/sunxi_display.c b/drivers/video/sunxi_display.c
-index 9fee66a..988093e 100644
+index 56f6c8e..e05511b 100644
 --- a/drivers/video/sunxi_display.c
 +++ b/drivers/video/sunxi_display.c
 @@ -690,14 +690,70 @@ static void sunxi_lcdc_enable(void)
