@@ -1,0 +1,34 @@
+diff --git a/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts b/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts
+index d8103e20c..d9d5c7fb3 100644
+--- a/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts
++++ b/arch/arm/boot/dts/sun7i-a20-cubieboard2.dts
+@@ -173,12 +173,15 @@ &gmac_mdio {
+ 	phy1: ethernet-phy@1 {
+ 		reg = <1>;
+ 	};
++
++};
++
++&pio {
+ 	cubiets_int_pin:cubiets_int_pin@0 {
+ 		allwinner,pins = "PH7";
+ 		allwinner,function = "irq";
+ 		bias-pull-up;
+ 	};
+-
+ };
+ 
+ &ohci0 {
+diff --git a/arch/arm/boot/dts/sun7i-a20.dtsi b/arch/arm/boot/dts/sun7i-a20.dtsi
+index 3e2a463a6..69732042a 100644
+--- a/arch/arm/boot/dts/sun7i-a20.dtsi
++++ b/arch/arm/boot/dts/sun7i-a20.dtsi
+@@ -81,7 +81,7 @@ framebuffer-lcd0 {
+ 			clocks = <&ccu CLK_AHB_LCD0>, <&ccu CLK_AHB_DE_BE0>,
+ 				 <&ccu CLK_DE_BE0>, <&ccu CLK_TCON0_CH0>,
+ 				 <&ccu CLK_DRAM_DE_BE0>;
+-			status = "disabled";
++			status = "okay";
+ 		};
+ 
+ 		framebuffer-lcd0-tve0 {
